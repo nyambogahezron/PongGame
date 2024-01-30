@@ -33,8 +33,8 @@ ball.shape('square')
 ball.color('white')
 ball.penup()
 ball.goto(0, 0)
-ball.move_x = 0.5
-ball.move_y = 0.5
+ball.move_x = 0.3
+ball.move_y = 0.3
 
 # Move Paddle A
 # Up
@@ -99,3 +99,12 @@ while True:
         ball.goto(0, 0)
         ball.move_x *= -1
 
+
+    # Ball and Paddle collisions
+    if (ball.xcor() > 340 and ball.xcor() < 350)and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(340)
+        ball.move_x *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350)and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
+        ball.setx(-340)
+        ball.move_x *= -1
