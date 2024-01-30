@@ -36,6 +36,19 @@ ball.goto(0, 0)
 ball.move_x = 0.3
 ball.move_y = 0.3
 
+# score 
+score_a = 0
+score_b = 0   
+
+# Scores Screen 
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color('white')
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 270)
+pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 24, 'normal'} )
+
 # Move Paddle A
 # Up
 
@@ -94,10 +107,17 @@ while True:
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.move_x *= -1
+        score_a += 1
+        pen.clear()
+        pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 24, 'normal'} )
 
     if ball.xcor() < -390:
         ball.goto(0, 0)
         ball.move_x *= -1
+        score_b += 1
+        pen.clear()
+        pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 24, 'normal'} )
+
 
 
     # Ball and Paddle collisions
