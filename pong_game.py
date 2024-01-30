@@ -1,4 +1,5 @@
 import turtle
+import winsound
 
 window = turtle.Screen()
 window.title('PONG GAME')
@@ -47,7 +48,25 @@ pen.color('white')
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 270)
-pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 24, 'normal'} )
+pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 26, 'bold'} )
+
+
+# Footer 
+footer = turtle.Turtle()
+footer.speed(0)
+footer.color('blue')
+footer.penup()
+footer.hideturtle()
+footer.goto(-370, -290)
+footer.write("Prayer A [a, z] ", align="left", font={'Times', 26, 'bold'} )
+ 
+footer_b = turtle.Turtle()
+footer_b.speed(0)
+footer_b.color('blue')
+footer_b.penup()
+footer_b.hideturtle()
+footer_b.goto(180, -290)
+footer_b.write("Prayer B [Up And Down Arrow Key] ", align="left", font={'Times', 26, 'bold'} )
 
 # Move Paddle A
 # Up
@@ -98,10 +117,13 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.move_y *= -1
+        winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
 
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.move_y *= -1
+        winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+
 
     # y-axis Border Checking 
     if ball.xcor() > 390:
@@ -109,14 +131,14 @@ while True:
         ball.move_x *= -1
         score_a += 1
         pen.clear()
-        pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 24, 'normal'} )
+        pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 26, 'bold'} )
 
     if ball.xcor() < -390:
         ball.goto(0, 0)
         ball.move_x *= -1
         score_b += 1
         pen.clear()
-        pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 24, 'normal'} )
+        pen.write('Player A: {} Player B: {}'.format(score_a, score_b), align="center", font={'Courier', 26, 'bold'} )
 
 
 
@@ -124,7 +146,11 @@ while True:
     if (ball.xcor() > 340 and ball.xcor() < 350)and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
         ball.move_x *= -1
+        winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+
 
     if (ball.xcor() < -340 and ball.xcor() > -350)and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-340)
         ball.move_x *= -1
+        winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+
