@@ -33,6 +33,8 @@ ball.shape('square')
 ball.color('white')
 ball.penup()
 ball.goto(0, 0)
+ball.move_x = 0.5
+ball.move_y = 0.5
 
 # Move Paddle A
 # Up
@@ -42,20 +44,12 @@ def paddle_a_up():
     y +=20
     paddle_a.sety(y)
 
-# Keyboard moving key listen
-window.listen()
-window.onkeypress(paddle_a_up, 'a')
 
 # Down 
 def paddle_a_down():
     y = paddle_a.ycor()
     y -=20
     paddle_a.sety(y)
-
-# Keyboard moving key listen
-window.listen()
-window.onkeypress(paddle_a_down, 'z')
-
 
 # Move Paddle B
 # Up
@@ -65,9 +59,6 @@ def paddle_b_up():
     y +=20
     paddle_b.sety(y)
 
-# Keyboard moving key listen
-window.listen()
-window.onkeypress(paddle_b_up, 'l')
 
 # Down 
 def paddle_b_down():
@@ -77,8 +68,34 @@ def paddle_b_down():
 
 # Keyboard moving key listen
 window.listen()
-window.onkeypress(paddle_b_down, 'm')
+window.onkeypress(paddle_a_up, 'a')
+window.onkeypress(paddle_a_down, 'z')
+window.onkeypress(paddle_b_up, 'Up')
+window.onkeypress(paddle_b_down, 'Down')
 
 # Main Game loop 
 while True:
     window.update()
+
+    # Move the ball 
+    ball.setx(ball.xcor() + ball.move_x)
+    ball.sety(ball.ycor() + ball.move_y)
+
+    # y-axis Border Checking 
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.move_y *= -1
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.move_y *= -1
+
+    # y-axis Border Checking 
+    if ball.xcor() > 390:
+        ball.goto(0, 0)
+        ball.move_x *= -1
+
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.move_x *= -1
+
